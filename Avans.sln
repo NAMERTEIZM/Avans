@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.Test", "Avans.Test\Av
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avans.ExceptionHandling.UI", "Avans.ExceptionHandling.UI\Avans.ExceptionHandling.UI.csproj", "{D31624F8-0DEE-48A3-B56B-F5BE9F4CAF5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avans.LOGGING", "Avans.LOGGING\Avans.LOGGING.csproj", "{7F256947-82AE-4B3B-894A-79573CFF4527}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{D31624F8-0DEE-48A3-B56B-F5BE9F4CAF5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D31624F8-0DEE-48A3-B56B-F5BE9F4CAF5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D31624F8-0DEE-48A3-B56B-F5BE9F4CAF5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F256947-82AE-4B3B-894A-79573CFF4527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F256947-82AE-4B3B-894A-79573CFF4527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F256947-82AE-4B3B-894A-79573CFF4527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F256947-82AE-4B3B-894A-79573CFF4527}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{FA3D8796-3DF8-48D6-93BB-1A365AB36BA2} = {859685F5-7EB4-4E93-BFE2-B74F591610AC}
 		{1EDA4853-A73C-4580-BACB-B11AFE9E1F7B} = {FE9DD425-FCDD-42C2-9BCE-274F1A3C17BC}
 		{D31624F8-0DEE-48A3-B56B-F5BE9F4CAF5E} = {859685F5-7EB4-4E93-BFE2-B74F591610AC}
+		{7F256947-82AE-4B3B-894A-79573CFF4527} = {FE9DD425-FCDD-42C2-9BCE-274F1A3C17BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BBDB7833-919F-46AB-8433-8E0793BDA742}

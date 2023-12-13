@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: 'Arial';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            width: 315px;
+            overflow: hidden;
+            padding: 20px;
+            background-color: #6abadeba;
+            border-radius: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #277582;
+            padding: 20px;
+        }
+
+        label {
+            color: #ffffff;
+            font-size: 17px;
+        }
+
+        #Uname,
+        #Pass,
+        #log,
+        #cars {
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 3px;
+            padding-left: 8px;
+            margin-bottom: 15px;
+        }
+
+        #log {
+            border-radius: 17px;
+            color: #37a7dbba;
+            font-weight: bold;
+        }
+
+        span {
+            color: white;
+            font-size: 17px;
+        }
+
+        a {
+            float: right;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <form id="login" method="get" action="login.php">
+            <label>
+                <b>
+                    Kullanıcı Adı
+                </b>
+            </label>
+            <input type="text" name="Uname" id="Uname" placeholder="Kullanıcı adı giriniz">
+            <br><br>
+            <label>
+                <b>
+                    Şifre
+                </b>
+                <br>
+            </label>
+            <input type="Password" name="Pass" id="Pass" placeholder="Şifre giriniz">
+            <br><br>
+            <label>
+                <b>
+                    Ünvan
+                </b>
+            </label>
+            <br>
+            <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+            <br><br>
+            <input type="submit" name="log" id="log" value="Kayıt Ol! ">
+            <br><br>
+            <a href="#">Bir hesabın mevcut mu?</a>
+        </form>
+    </div>
+</body>
+</html>
