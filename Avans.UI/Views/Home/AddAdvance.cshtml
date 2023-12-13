@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    
+    body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 48%;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+</style>
+
+
+<div class="form-container">
+    <label for="avansMiktari">Avans Miktarı:</label>
+    <input type="text" id="avansMiktari" name="avansMiktari" placeholder="Avans miktarını giriniz">
+
+    <label for="istenilenTarih">İstenilen Tarih:</label>
+    <input type="date" id="istenilenTarih" name="istenilenTarih">
+
+    <label for="projeler">Projeler:</label>
+    <select id="projeler" name="projeler">
+        <option value="proje1">Proje 1</option>
+        <option value="proje2">Proje 2</option>
+        <option value="proje3">Proje 3</option>
+    </select>
+
+    <label for="aciklama">Açıklama:</label>
+    <textarea id="aciklama" name="aciklama" rows="4" placeholder="Açıklama giriniz"></textarea>
+
+    <br>
+
+    <div class="buttons-container">
+        <button class="btn btn-danger">Vazgeç</button>
+        <button class="btn btn-success">Kaydet</button>
+    </div>
+</div>

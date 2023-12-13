@@ -22,6 +22,14 @@ namespace Avans.UI.Controllers
         {
             return View();
         }
+        public IActionResult AddAdvance()
+        {
+            return View();
+        }
+        public IActionResult AdvanceHistory()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
