@@ -1,6 +1,12 @@
+using Avans.BLL.Concrete;
+using Avans.Core.Contexts;
+using Avans.DAL.Abstract;
+using Avans.DAL.Concrete;
+using Avans.Models.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +14,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,6 +33,22 @@ namespace Avans.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //ui için izin ver
+            //services.AddCors(opt =>
+            //{
+            //    opt.AddPolicy("AllowOrigin", a => a.WithOrigins("http://localhost:54825").AllowAnyHeader().AllowAnyMethod());
+            //});
+            string connectionString = Configuration.GetConnectionString("myconn");
+            services.AddScoped<IDbConnection>(conn => new SqlConnection(connectionString));
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IGenericRepository<Advance>), typeof(GenericRepository<Advance>));
+            services.AddScoped<AdvanceService>();
+            services.AddScoped<ConnectionHelper>();
+            services.AddScoped<AdvanceRepository>();
+
+
+
+
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen(c =>

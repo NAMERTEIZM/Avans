@@ -62,23 +62,29 @@
         </tr>
     </thead>
     <tbody>
+       @foreach (var item in ViewBag.sonuc)
+        {
+            <tr>
 
-        <tr>
-            <td>1000</td>
-            <td>2023-01-01</td>
-            <td>2023-01-01</td>
-            <td>A projesi</td>
-            <td>A projesi</td>
-            <td>A projesi</td>
-            <td>A projesi</td>
-            <td>A projesi</td>
-            <td>A projesi</td>
-            <td>A projesi</td>
-            <td>A projesi</td>
-            <td>A projesi</td>
-            <td>A projesi</td>
+                <td>@item.AdvanceAmount</td>
+                <td>@item.RequestDate</td>
+                <td>@item.DesiredDate</td>
+                <td>@item.ProjectName</td>
+                <td>@item.StatusName</td>
+                <td>@item.Name</td>
+                <td>@item.TitleName</td>
+                <td>@item.Date</td>
+                <td>@item.ApprovedAmount</td>
+                <td>@item.DeterminedPaymentDate</td>
+                <td>@item.ReceiptDate</td>
+                <td>@item.isRefundReceipt</td>
+                
 
-        </tr>
+                
+
+            </tr>
+        }
+        
 
     </tbody>
 </table>

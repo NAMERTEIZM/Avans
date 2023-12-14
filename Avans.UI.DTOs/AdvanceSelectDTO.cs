@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
-namespace Avans.Models.Entities
+namespace Avans.UI.DTOs
 {
-    [Table("Advance")]
-
-    public class Advance
+    [Table("AdvanceHistory")]
+    public class AdvanceSelectDTO
     {
         [Key]
-        public int ID { get; set; }
-        public int StatusID { get; set; }
-        public int AdvanceID { get; set; }
-        public int TransactorID { get; set; }
-        public decimal ApprovedAmount { get; set; }
+        public int ID { get; set; } 
+        public int StatusID { get; set; } 
+        public int AdvanceID { get; set; } 
+        public int TransactorID { get; set; } 
+        public decimal ApprovedAmount { get; set; } 
         [Column("Date")]
         public DateTime Date { get; set; }
         public decimal AdvanceAmount { get; set; }

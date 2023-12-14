@@ -16,7 +16,7 @@ namespace Avans.DAL.Concrete
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         IDbConnection _connection;
-        private readonly string connectionString = "Coonection stringini yaz buraya";
+        private readonly string connectionString = "Server=localhost\\SQLEXPRESS;Database=AvansDatabase;Trusted_Connection=True;TrustServerCertificate=True;";
         public GenericRepository()
         {
             _connection = new SqlConnection(connectionString);

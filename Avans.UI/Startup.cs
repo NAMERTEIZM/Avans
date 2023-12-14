@@ -1,3 +1,4 @@
+using Avans.APIConnection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,10 @@ namespace Avans.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddHttpClient<AdvanceService>(conf =>
+            {
+                conf.BaseAddress = new Uri(Configuration["MyBaseUri"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

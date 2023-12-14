@@ -9,6 +9,11 @@
     <PackageReference Include="AutoMapper.Collection" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Dapper" Version="2.1.24" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Avans.UI.DTOs\Avans.UI.DTOs.csproj" />
   </ItemGroup>
 
 </Project>

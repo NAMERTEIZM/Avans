@@ -12,6 +12,13 @@ namespace Avans.BLL.Concrete
 {
     public class AdvanceService
     {
+        AdvanceRepository advanceRepository;
+
+        public AdvanceService(AdvanceRepository advanceRepository)
+        {
+            this.advanceRepository = advanceRepository;
+        }
+
         public bool Add(AdvanceDTO advancedto) //entity yolla 
         {
             
@@ -20,7 +27,6 @@ namespace Avans.BLL.Concrete
             bool isAdded = false;
             try
             {
-                AdvanceRepository advanceRepository = new AdvanceRepository();
                 
                 
                 isAdded = advanceRepository.Add(new MyMapper<AdvanceDTO, Advance>().Map<AdvanceDTO, Advance>(advancedto)); //advance yerine entity yi mapleyerek olusacak advance dto yu gonder
@@ -36,7 +42,6 @@ namespace Avans.BLL.Concrete
             List<Advance> products = new List<Advance>();
             try
             {
-                AdvanceRepository advanceRepository = new AdvanceRepository();
                 products = advanceRepository.GetAll().ToList();
             }
             catch (Exception ex)
@@ -51,7 +56,6 @@ namespace Avans.BLL.Concrete
             Advance product = new Advance();
             try
             {
-                AdvanceRepository advanceRepository = new AdvanceRepository();
                 product = advanceRepository.GetById(Id);
             }
             catch (Exception ex)
@@ -66,7 +70,6 @@ namespace Avans.BLL.Concrete
             bool isUpdated = false;
             try
             {
-                AdvanceRepository advanceRepository = new AdvanceRepository();
                 isUpdated = advanceRepository.Update(advance);
             }
             catch (Exception ex)
@@ -81,7 +84,6 @@ namespace Avans.BLL.Concrete
             bool isDeleted = false;
             try
             {
-                AdvanceRepository advanceRepository = new       AdvanceRepository();
                 isDeleted = advanceRepository.Delete(advance);
             }
             catch (Exception ex)
