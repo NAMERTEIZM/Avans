@@ -6,8 +6,18 @@
 
   <ItemGroup>
     <Folder Include="Contexts\" />
-    <Folder Include="Mappers\" />
     <Folder Include="Result\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Collection" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Dapper" Version="2.1.24" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Avans.Models\Avans.Models.csproj" />
   </ItemGroup>
 
 </Project>

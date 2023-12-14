@@ -1,0 +1,160 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+    }
+
+    #main-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    .detail-header {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .card {
+        width: 48%;
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-container {
+        width: 100%;
+        margin-top: 20px;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        background-color: white;
+    }
+
+    .approval-card {
+        width: 100%;
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .approval-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .approval-input {
+        width: 70%;
+        padding: 10px;
+        margin-right: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .approval-button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        width: 48%;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: #fff;
+    }
+</style>
+
+<h2 class="detail-header">Onay Bekleyen Avans Talebi Detayı</h2>
+
+<div id="main-container">
+
+    <div class="card">
+        <p>Çalışan Adı: [Çalışan Adı]</p>
+        <p>Unvanı: [Unvanı]</p>
+        <p>Birimi: [Birimi]</p>
+        <p>Talep Oluşturma Tarihi: [Talep Oluşturma Tarihi]</p>
+        <p>Alınmak İstenen Tarih: [Alınmak İstenen Tarih]</p>
+        <p>Projeler: [Projeler]</p>
+    </div>
+
+    <div class="card">
+        <p>Talep Edilen Tutar: [Talep Edilen Tutar]</p>
+        <p>Son Onaylanan Tutar: [Son Onaylanan Tutar]</p>
+        <p>Son Durumu: [Son Durumu]</p>
+        <p>Açıklama: [Açıklama]</p>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>İşlem No</th>
+                    <th>Durum</th>
+                    <th>İşlem Zamanı</th>
+                    <th>İşlemi Yapan</th>
+                    <th>Sonraki Aşama Kullanıcısı</th>
+                    <th>Sonraki Durum</th>
+                    <th>Onaylanan Tutar</th>
+                    <th>Ödeme Yapılacak Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1000</td>
+                    <td>Onay Bekliyor</td>
+                    <td>2023-01-01</td>
+                    <td>[İşlemi Yapan]</td>
+                    <td>[Sonraki Aşama Kullanıcısı]</td>
+                    <td>[Sonraki Durum]</td>
+                    <td>[Onaylanan Tutar]</td>
+                    <td>[Ödeme Yapılacak Tarih]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="approval-card">
+        <label for="approvedAmount">Uygun Görülen Tutar:</label>
+        <input type="text" id="approvedAmount" name="approvedAmount" class="approval-input">
+
+        <div class="approval-container">
+            <button class="approval-button btn-danger">Red</button>
+            <br>
+            <button class="approval-button btn-success">Onayla</button>
+        </div>
+    </div>
+
+</div>

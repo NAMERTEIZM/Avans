@@ -30,6 +30,18 @@ namespace Avans.UI.Controllers
         {
             return View();
         }
+        public IActionResult AdvanceDetail()
+        {
+            return View();
+        }
+        public IActionResult AdvancePendingApproval()
+        {
+            return View();
+        }
+        public IActionResult AdvancePendingApprovalDetail()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

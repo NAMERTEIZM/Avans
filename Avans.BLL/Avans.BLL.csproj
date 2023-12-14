@@ -6,7 +6,20 @@
 
   <ItemGroup>
     <Folder Include="Abstract\" />
-    <Folder Include="Concrete\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Collection" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Dapper" Version="2.1.24" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Avans.Core\Avans.Core.csproj" />
+    <ProjectReference Include="..\Avans.DAL\Avans.DAL.csproj" />
+    <ProjectReference Include="..\Avans.DTOs\Avans.DTOs.csproj" />
+    <ProjectReference Include="..\Avans.Models\Avans.Models.csproj" />
   </ItemGroup>
 
 </Project>
