@@ -35,6 +35,18 @@ namespace Avans.APIConnection
             }
             return null;
         }
+        public async Task<string> AddAdvance(AdvanceInsertDTO dto)
+        {
+            var str = new StringContent(JsonConvert.SerializeObject(dto));
+            str.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            
+            var donendeger = await _client.PostAsync("addadvance", str);
+            if (donendeger.IsSuccessStatusCode)
+            {
+                return donendeger.Content.ReadAsStringAsync().Result == null ? "veri eklenirken bir hata oluştu" : "Avans eklendi...";
+            }
+            return null;
+        }
 
     }
 }

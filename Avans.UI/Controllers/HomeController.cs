@@ -23,10 +23,7 @@ namespace Avans.UI.Controllers
             return View();
         }
         
-        public IActionResult AddAdvance()
-        {
-            return View();
-        }
+        
         public IActionResult AdvanceDetail()
         {
             return View();

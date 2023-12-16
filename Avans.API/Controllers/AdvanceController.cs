@@ -31,6 +31,19 @@ namespace Avans.API.Controllers
             return _repository.GetAdvanceAll();
 
         }
+        [HttpPost("~/api/addadvance")]
+        public ActionResult POST([FromBody] AdvanceInsertDTO dto)
+        {
+
+            if (dto == null)
+                return BadRequest();
+            if (_service.Add(dto))
+            {
+                return Ok(dto);
+            }
+            return BadRequest();
+        }
+
         //burada aldııgn dto yu bll'e gonder
 
     }

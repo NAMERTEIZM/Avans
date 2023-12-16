@@ -1,4 +1,5 @@
 ﻿using Avans.Core.Mappers;
+using Avans.DAL.Abstract;
 using Avans.DAL.Concrete;
 using Avans.DTOs;
 using Avans.Models.Entities;
@@ -14,12 +15,11 @@ namespace Avans.BLL.Concrete
     {
         AdvanceRepository advanceRepository;
 
-        public AdvanceService(AdvanceRepository advanceRepository)
+        public AdvanceService(AdvanceRepository advanceRepository )
         {
             this.advanceRepository = advanceRepository;
         }
-
-        public bool Add(AdvanceDTO advancedto) //entity yolla 
+        public bool Add(AdvanceInsertDTO advancedto) //entity yolla 
         {
             
 
@@ -27,9 +27,7 @@ namespace Avans.BLL.Concrete
             bool isAdded = false;
             try
             {
-                
-                
-                isAdded = advanceRepository.Add(new MyMapper<AdvanceDTO, Advance>().Map<AdvanceDTO, Advance>(advancedto)); //advance yerine entity yi mapleyerek olusacak advance dto yu gonder
+                isAdded = advanceRepository.AddAdvanceWithHistory(advancedto); //advance yerine entity yi mapleyerek olusacak advance dto yu gonder
             }
             catch (Exception ex)
             {

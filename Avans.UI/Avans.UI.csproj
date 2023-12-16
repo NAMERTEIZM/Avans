@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Avans.APIConnection\Avans.APIConnection.csproj" />
+    <ProjectReference Include="..\Avans.DTOs\Avans.DTOs.csproj" />
     <ProjectReference Include="..\Avans.UI.DTOs\Avans.UI.DTOs.csproj" />
   </ItemGroup>
 

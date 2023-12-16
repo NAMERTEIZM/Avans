@@ -28,6 +28,10 @@ namespace Avans.UI
             {
                 conf.BaseAddress = new Uri(Configuration["MyBaseUri"]);
             });
+            services.AddHttpClient<ProjectService>(conf =>
+            {
+                conf.BaseAddress = new Uri(Configuration["MyBaseUri"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

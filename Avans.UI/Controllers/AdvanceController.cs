@@ -10,9 +10,12 @@ namespace Avans.UI.Controllers
     public class AdvanceController : Controller
     {
         AdvanceService _api;
-        public AdvanceController(AdvanceService  api)
+        ProjectService _projectService;
+        public AdvanceController(AdvanceService  api, ProjectService projectService)
         {
             _api = api;
+            _projectService = projectService;
+
         }
         public IActionResult Index()
         {
@@ -27,11 +30,29 @@ namespace Avans.UI.Controllers
             //TempData["sonuc"] = donendeger;
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddAdvance(AdvanceInsertDTO dto)
+        {
+
+            var donendeger = await _api.AddAdvance(dto);
+            TempData["sonuc"] = donendeger;
+            return RedirectToAction("AdvanceHistory");
+        }
+        [HttpGet]
+        public async Task<IActionResult> AddAdvance()
+        {
+
+            var donendeger = await _projectService.GetProject();
+            ViewBag.project = donendeger;
+            return View();
+        }
+
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> AdvanceHistory(AdvanceSelectDTO dto)
         //{
-            
+
         //    return RedirectToAction("Index");
         //}
     }

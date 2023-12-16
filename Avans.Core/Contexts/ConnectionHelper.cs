@@ -1,8 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,15 +9,24 @@ namespace Avans.Core.Contexts
 {
     public class ConnectionHelper
     {
-        private  IConfiguration _configuration;
+        private static IConfiguration _configuration = null!;
 
-        public ConnectionHelper(IConfiguration configuration)
+
+        public static void SetConfiguration(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        public IDbConnection CreateConnection() => new SqlConnection(_configuration.GetConnectionString("myconn"));
 
-        
+        public static IConfiguration GetConfiguration()
+        {
+            return _configuration;
+        }
+
+
+        public static string GetConnectionString()
+        {
+            return GetConfiguration().GetSection("ConnectionStrings:myconn").Value;
+        }
     }
 }

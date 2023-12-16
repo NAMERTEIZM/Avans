@@ -21,7 +21,7 @@ namespace Avans.DAL.Concrete
         {
             _connection = new SqlConnection(connectionString);
         }
-        public bool Add(T entity)
+         public bool Add(T entity)
         {
             int rowsEffected = 0;
             try
@@ -161,7 +161,7 @@ namespace Avans.DAL.Concrete
         }
 
 
-        private string GetColumns(bool excludeKey = false)
+        public string GetColumns(bool excludeKey = false)
         {
             var type = typeof(T);
             var columns = string.Join(", ", type.GetProperties()
