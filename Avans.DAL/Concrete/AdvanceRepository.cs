@@ -59,13 +59,13 @@ namespace Avans.DAL.Concrete
                             {
                                 // 1. Advance tablosuna ekleme
                                 int advanceID;
-                                using (var command = new SqlCommand("INSERT INTO Advance (AdvanceAmount, AdvanceDescription, ProjectID, DesiredDate, StatusID) VALUES (@AdvanceAmount, @AdvanceDescription, @ProjectID, @DesiredDate, @StatusID); SELECT SCOPE_IDENTITY();", _dbConnection as SqlConnection,transaction as SqlTransaction))
+                                using (var command = new SqlCommand("INSERT INTO Advance (AdvanceAmount, AdvanceDescription, ProjectID, DesiredDate) VALUES (@AdvanceAmount, @AdvanceDescription, @ProjectID, @DesiredDate); SELECT SCOPE_IDENTITY();", _dbConnection as SqlConnection,transaction as SqlTransaction))
                                 {
                                     command.Parameters.AddWithValue("@AdvanceAmount", advanceInsertDTO.AdvanceAmount);
                                     command.Parameters.AddWithValue("@AdvanceDescription", advanceInsertDTO.AdvanceDescription);
                                     command.Parameters.AddWithValue("@ProjectID", advanceInsertDTO.ProjectID);
                                     command.Parameters.AddWithValue("@DesiredDate", advanceInsertDTO.DesiredDate);
-                                    command.Parameters.AddWithValue("@StatusID", advanceInsertDTO.StatusID);
+                                    //command.Parameters.AddWithValue("@StatusID", advanceInsertDTO.StatusID);
 
                                     // Advance tablosuna ekleme işlemini gerçekleştir ve eklenen ID'yi al
                                     advanceID = Convert.ToInt32(command.ExecuteScalar());
