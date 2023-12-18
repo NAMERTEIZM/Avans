@@ -1,9 +1,11 @@
-﻿using Avans.UI.DTOs;
+﻿using Avans.DTOs;
+using Avans.UI.DTOs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -26,6 +28,43 @@ namespace Avans.APIConnection
                 if (value.IsSuccessStatusCode)
                 {
                     return JsonConvert.DeserializeObject<List<AdvanceSelectDTO>>(await value.Content.ReadAsStringAsync());
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+            return null;
+        }
+        public async Task<List<AdvanceSelectDTO>> GetAdvanceByID(int advanceID)
+        {
+            try
+            {
+                var response = await _client.GetAsync($"getadvancebyid/{advanceID}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<List<AdvanceSelectDTO>>(await response.Content.ReadAsStringAsync());
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            return null;
+        }
+
+
+        public async Task<List<AdvancesPendingApprovalSelectDTO>> GetAdvancePending()
+        {
+
+            try
+            {
+                var value = await _client.GetAsync("getadvancepending");
+                if (value.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<List<AdvancesPendingApprovalSelectDTO>>(await value.Content.ReadAsStringAsync());
                 }
             }
             catch (Exception ex)

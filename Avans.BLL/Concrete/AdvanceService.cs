@@ -37,30 +37,44 @@ namespace Avans.BLL.Concrete
 
         public List<Advance> GetAll()
         {
-            List<Advance> products = new List<Advance>();
+            List<Advance> advances = new List<Advance>();
             try
             {
-                products = advanceRepository.GetAll().ToList();
+                advances = advanceRepository.GetAll().ToList();
             }
             catch (Exception ex)
             {
             }
 
-            return products;
+            return advances;
         }
+        public List<AdvancesPendingApprovalSelectDTO> GetPending()
+        {
+            List<AdvancesPendingApprovalSelectDTO> advances = new List<AdvancesPendingApprovalSelectDTO>();
+            try
+            {
+                advances = advanceRepository.GetAdvanceForPendingApproval().ToList();
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return advances;
+        }
+
 
         public Advance Get(int Id)
         {
-            Advance product = new Advance();
+            Advance advances = new Advance();
             try
             {
-                product = advanceRepository.GetById(Id);
+                advances = advanceRepository.GetById(Id);
             }
             catch (Exception ex)
             {
             }
 
-            return product;
+            return advances;
         }
 
         public bool Update(Advance advance)

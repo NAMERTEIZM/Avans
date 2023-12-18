@@ -1,6 +1,9 @@
-﻿@{
+﻿@using Avans.UI.DTOs;
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var advanceData = ViewBag.sonuc as List<AdvanceSelectDTO>;
 }
+
 <style>
     body {
         font-family: 'Arial', sans-serif;
@@ -34,7 +37,7 @@
     th, td {
         padding: 10px;
         text-align: left;
-        background-color:white;
+        background-color: white;
     }
 
     th {
@@ -48,35 +51,34 @@
         padding: 10px;
         background-color: #dc3545;
         color: #fff;
-        margin-top:5px;
-
+        margin-top: 5px;
     }
 
-    #TopText{
-        display:flex;
-        justify-content:center;
+    #TopText {
+        display: flex;
+        justify-content: center;
     }
 </style>
+
 <div id="TopText">
     <h2>Avans Talebi Tarihçesi</h2>
-
 </div>
 
 <div id="main-container">
     <div class="card">
-        <p>Talep No: </p>
-        <p>Talep Oluşturulma Tarihi: </p>
-        <p>Alınmak İstenen Tarih: </p>
-        <p>Projeler: </p>
-        <p>Açıklama: </p>
+        <p>Talep No: @advanceData?.FirstOrDefault()?.AdvanceID</p>
+        <p>Talep Oluşturulma Tarihi: @advanceData?.FirstOrDefault()?.RequestDate</p>
+        <p>Alınmak İstenen Tarih: @advanceData?.FirstOrDefault()?.DesiredDate</p>
+        <p>Projeler: @advanceData?.FirstOrDefault()?.ProjectName</p>
+        <p>Açıklama: @advanceData?.FirstOrDefault()?.AdvanceAmount</p>
     </div>
 
     <div class="card">
-        <p>Talep Edilen Tutar: </p>
-        <p>Onaylanan Tutar: </p>
-        <p>Son Durumu: </p>
-        <p>Makbuz No: </p>
-        <p>Avans Geri Ödeme Durumu: </p>
+        <p>Talep Edilen Tutar: @advanceData?.FirstOrDefault()?.AdvanceAmount</p>
+        <p>Onaylanan Tutar: @advanceData?.FirstOrDefault()?.ApprovedAmount</p>
+        <p>Son Durumu: @advanceData?.FirstOrDefault()?.StatusName</p>
+        <p>Makbuz No: @advanceData?.FirstOrDefault()?.ReceiptNo</p>
+        <p>Avans Geri Ödeme Durumu: @advanceData?.FirstOrDefault()?.isRefundReceipt</p>
     </div>
 </div>
 
@@ -94,14 +96,19 @@
         </tr>
     </thead>
     <tbody>
-    <td>1000</td>
-    <td>2023-01-01</td>
-    <td>2023-01-01</td>
-    <td>A projesi</td>
-    <td>A projesi</td>
-    <td>A projesi</td>
-    <td>A projesi</td>
-    <td>A projesi</td>
+        @foreach (var item in advanceData)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.StatusName</td>
+                <td>@item.Date</td>
+                <td>@item.Name</td>
+                <td>@item.TitleName</td>
+                <td>@item.StatusName</td>
+                <td>@item.ApprovedAmount</td>
+                <td>@item.DeterminedPaymentDate</td>
+            </tr>
+        }
     </tbody>
 </table>
 

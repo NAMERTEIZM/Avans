@@ -10,6 +10,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Avans.Models.Entities;
+using static System.Formats.Asn1.AsnWriter;
+using System.Data.Common;
 
 namespace Avans.DAL.Concrete
 {
@@ -21,7 +24,7 @@ namespace Avans.DAL.Concrete
         {
             _connection = new SqlConnection(connectionString);
         }
-         public bool Add(T entity)
+        public bool Add(T entity)
         {
             int rowsEffected = 0;
             try
@@ -208,5 +211,73 @@ namespace Avans.DAL.Concrete
 
             return null;
         }
+
+        //    public bool UpdateWithTransaction(Advance advance)
+        //    {
+        //        bool success = false;
+
+        //        using (var transaction = _connection.BeginTransaction())
+        //        {
+        //            try
+        //            {
+        //                // Advance tablosunu güncelle
+        //                string tableName = GetTableName();
+        //                string keyColumn = GetKeyColumnName();
+        //                string keyProperty = GetKeyPropertyName();
+
+        //                StringBuilder query = new StringBuilder();
+        //                query.Append($"UPDATE {tableName} SET ");
+
+        //                foreach (var property in GetProperties(true))
+        //                {
+        //                    var columnAttr = property.GetCustomAttribute<ColumnAttribute>();
+
+        //                    string propertyName = property.Name;
+        //                    string columnName = columnAttr?.Name ?? propertyName; // Eğer ColumnAttribute yoksa, özellik adını kullan
+
+        //                    query.Append($"{columnName} = @{propertyName},");
+        //                }
+
+        //                query.Remove(query.Length - 1, 1);
+
+        //                query.Append($" WHERE {keyColumn} = @{keyProperty}");
+
+        //                int rowsAffected = _connection.Execute(query.ToString(), advance, transaction);
+
+        //                if (rowsAffected > 0)
+        //                {
+        //                    using (var command = new SqlCommand("INSERT INTO AdvanceHistory (AdvanceID, TransactorID, ApprovedAmount, Date) VALUES  (@AdvanceID, @TransactorID, @ApprovedAmount, @Date);", _connection as SqlConnection, transaction as SqlTransaction))
+        //                    {
+
+        //                        command.Parameters.AddWithValue("@AdvanceID", advance.AdvanceID);
+        //                        command.Parameters.AddWithValue("@TransactorID", 9); // Burada bir transactor ID belirtmelisiniz
+        //                        command.Parameters.AddWithValue("@ApprovedAmount", advanceInsertDTO.AdvanceAmount);
+        //                        command.Parameters.AddWithValue("@Date", DateTime.Now);
+
+        //                        // AdvanceHistory tablosuna ekleme işlemini gerçekleştir
+        //                        command.ExecuteNonQuery();
+        //                    }
+
+        //                    // İşlemleri tamamla
+        //                    transaction.Commit();
+        //                    scope.Complete(); // TransactionScope'u tamamla
+        //                }
+        //                else
+        //                {
+        //                    // Eğer Advance tablosu güncellenemediyse, transaction'ı geri al (işlemi iptal et)
+        //                    transaction.Rollback();
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                // Hata işlemleri
+        //                transaction.Rollback();
+        //            }
+        //        }
+
+        //        return success;
+        //    //}
+
+        //}
     }
 }

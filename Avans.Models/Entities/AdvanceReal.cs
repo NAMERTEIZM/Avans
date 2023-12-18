@@ -46,5 +46,12 @@ namespace Avans.Models.Entities
 
         [Column("Name")]
         public string Name { get; set; }
+        [Column("isApproved")]
+
+        public bool isApproved { get; set; }
+        [Column("EmployeeID")]
+
+        public int EmployeeID { get; set; }
+
     }
 }

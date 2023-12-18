@@ -23,6 +23,10 @@ namespace Avans.DTOs
         [Column("DesiredDate")]
 
         public DateTime DesiredDate { get; set; }
-        
+        [Column("EmployeeID")]
+
+        public int EmployeeID { get; set; }
+
+
     }
 }

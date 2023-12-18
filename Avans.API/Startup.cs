@@ -1,4 +1,6 @@
+using Avans.BLL.Abstract;
 using Avans.BLL.Concrete;
+using Avans.BLL.Concrete.Approval;
 using Avans.Core.Contexts;
 using Avans.Core.Mappers;
 using Avans.DAL.Abstract;
@@ -58,6 +60,20 @@ namespace Avans.API
             services.AddScoped<ProjectRepository>();
             services.AddScoped<ProjectService>();
             services.AddScoped<AuthService>();
+            services.AddScoped<ApprovalOperation>();
+            services.AddScoped<ApprovalService>();
+            services.AddScoped<IApproval,UnitManagerApprovalStrategy>();
+            services.AddScoped<IApproval,DirectorApprovalStrategy>();
+            services.AddScoped<IApproval,GeneralManagerAssistantApprovalStrategy>();
+            services.AddScoped<IApproval,GeneralManagerApprovalStrategy>();
+            services.AddScoped<IApproval,FinancialManagerApprovalStrategy>();
+            services.AddScoped<IApproval,AccountantApprovalStrategy>();
+
+
+
+
+
+
             services.AddScoped<IAuthDAL,AuthDAL>();
             services.AddScoped<TokenHelper>();
 

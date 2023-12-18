@@ -1,8 +1,6 @@
-﻿@using Avans.UI.DTOs;
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model AdvanceSelectDTO
 <style>
     body {
         font-family: 'Arial', sans-serif;
@@ -13,6 +11,11 @@
         text-align: center;
         color: #277582;
         padding: 20px;
+    }
+
+    .table-container {
+        max-height: 500px;
+        overflow-y: auto;
     }
 
     table {
@@ -42,11 +45,6 @@
         cursor: pointer;
     }
 
-    .scrollable-table {
-        max-height: 500px;
-        overflow-y: auto;
-    }
-
     #detail {
         background-color: #6abadeba;
         border: dotted 1px black;
@@ -54,24 +52,20 @@
     }
 </style>
 
-<h2>Geçmiş Avans Taleplerim</h2>
+<h2>Onay Bekleyen Avans Talepleri</h2>
 
-<div class="scrollable-table">
+<div class="table-container">
     <table>
         <thead>
             <tr>
+                <th>Çalışanın Adı</th>
+                <th>Unvanı</th>
+                <th>Birimi</th>
+                <th>Talep Durumu</th>
+                <th>Talep Oluşturulma Tarihi</th>
                 <th>Talep Tutarı</th>
-                <th>Talep Oluşturma Tarihi</th>
                 <th>İstenilen Tarih</th>
                 <th>Proje</th>
-                <th>Talep Durumu</th>
-                <th>Onaylayan/Reddeden</th>
-                <th>Onaylayan/Reddeden Unvan</th>
-                <th>Onay/Red Tarihi</th>
-                <th>Onaylanan Tutar</th>
-                <th>Belirlenen Ödeme Tarihi</th>
-                <th>Ödeme Yapılan Tarih</th>
-                <th>Geri Ödeme Durumu</th>
                 <th>Detay</th>
             </tr>
         </thead>
@@ -79,21 +73,15 @@
             @foreach (var item in ViewBag.sonuc)
             {
                 <tr>
-
-                    <td>@item.AdvanceAmount</td>
-                    <td>@item.RequestDate</td>
-                    <td>@item.DesiredDate</td>
-                    <td>@item.ProjectName</td>
-                    <td>@item.StatusName</td>
                     <td>@item.Name</td>
                     <td>@item.TitleName</td>
-                    <td>@item.Date</td>
-                    <td>@item.ApprovedAmount</td>
-                    <td>@item.DeterminedPaymentDate</td>
-                    <td>@item.ReceiptDate</td>
-                    <td>@item.isRefundReceipt</td>
-                    <td><a type="submit" asp-controller="Advance" asp-action="AdvanceDetail" asp-route-id="@item.AdvanceID" class="detail-button">Detay</a></td>
-
+                    <td>@item.BusinessUnitName</td>
+                    <td>@item.StatusName</td>
+                    <td>@item.RequestDate</td>
+                    <td>@item.AdvanceAmount</td>
+                    <td>@item.DesiredDate</td>
+                    <td>@item.ProjectName</td>
+                    <td><button id="detail" href="#">Detay </button></td>
                 </tr>
             }
         </tbody>
@@ -101,5 +89,3 @@
 </div>
 
 <button class="btn-exit">Çıkış</button>
-
-

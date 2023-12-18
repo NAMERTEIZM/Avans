@@ -18,6 +18,7 @@ namespace Avans.DTOs
         public int StatusID { get; set; }
         public int AdvanceID { get; set; }
         public int TransactorID { get; set; }
+        public int PaymentID { get; set; }
         public decimal ApprovedAmount { get; set; }
         [Column("Date")]
         public DateTime Date { get; set; }
@@ -30,6 +31,8 @@ namespace Avans.DTOs
         public string TitleName { get; set; }
         public DateTime DeterminedPaymentDate { get; set; }
         public DateTime ReceiptDate { get; set; }
+        public string ReceiptNo { get; set; }
+
         public bool isRefundReceipt { get; set; }
 
     }

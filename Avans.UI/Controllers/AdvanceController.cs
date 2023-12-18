@@ -30,6 +30,26 @@ namespace Avans.UI.Controllers
             //TempData["sonuc"] = donendeger;
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> AdvanceDetail(int id)
+        {
+            
+            var donendeger = await _api.GetAdvanceByID(id);
+
+            ViewBag.sonuc = donendeger;
+
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> AdvancePendingApproval()
+        {
+            var donendeger = await _api.GetAdvancePending();
+            ViewBag.sonuc = donendeger;
+
+            //TempData["sonuc"] = donendeger;
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddAdvance(AdvanceInsertDTO dto)
