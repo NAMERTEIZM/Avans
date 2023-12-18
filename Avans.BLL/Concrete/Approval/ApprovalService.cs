@@ -16,7 +16,7 @@ namespace Avans.BLL.Concrete.Approval
 
         public bool ApplyAmountApprovalLogic(AdvanceUpdateDTO advanceupdate)
         {
-            decimal advanceAmount = advanceupdate.AdvanceAmount;
+            decimal advanceAmount = advanceupdate.ApprovedAmount;
 
             if (advanceAmount >= 0 && advanceAmount <= 1000 ||advanceupdate.StatusID == 201)
             {

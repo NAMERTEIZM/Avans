@@ -1,6 +1,9 @@
-﻿@{
+﻿@using Avans.UI.DTOs;
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model AdvancesPendingApprovalSelectDTO
 <style>
     body {
         font-family: 'Arial', sans-serif;
@@ -81,7 +84,7 @@
                     <td>@item.AdvanceAmount</td>
                     <td>@item.DesiredDate</td>
                     <td>@item.ProjectName</td>
-                    <td><button id="detail" href="#">Detay </button></td>
+                    <td><a type="submit" asp-controller="Advance" asp-action="AdvancePendingApprovalDetail" asp-route-id="@item.ID" class="detail-button">Detay</a></td>
                 </tr>
             }
         </tbody>

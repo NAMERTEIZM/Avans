@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Avans.DTOs
+namespace Avans.UI.DTOs
 {
     public class AdvancesPendingApprovalSelectDTO
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public string TitleName { get; set; }
         public string BusinessUnitName { get; set; }
@@ -16,5 +17,11 @@ namespace Avans.DTOs
         public int AdvanceAmount { get; set; }
         public DateTime DesiredDate { get; set; }
         public string ProjectName { get; set; }
+        public int ApprovedAmount { get; set; }
+        public string AdvanceDescription { get; set; }
+        public DateTime Date { get; set; }
+        public int TransactorID { get; set; }
+        public int StatusID { get; set; }
+        public DateTime DeterminedPaymentDate { get; set; }
     }
 }

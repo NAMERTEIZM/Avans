@@ -1,6 +1,9 @@
-﻿@{
+﻿@using Avans.UI.DTOs;
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var advanceData = ViewBag.sonuc as List<AdvancesPendingApprovalSelectDTO>;
 }
+@model AdvanceUpdateDTO
 
 <style>
     body {
@@ -102,19 +105,19 @@
 <div id="main-container">
 
     <div class="card">
-        <p>Çalışan Adı: [Çalışan Adı]</p>
-        <p>Unvanı: [Unvanı]</p>
-        <p>Birimi: [Birimi]</p>
-        <p>Talep Oluşturma Tarihi: [Talep Oluşturma Tarihi]</p>
-        <p>Alınmak İstenen Tarih: [Alınmak İstenen Tarih]</p>
-        <p>Projeler: [Projeler]</p>
+        <p>Çalışan Adı: @advanceData?.FirstOrDefault()?.Name</p>
+        <p>Unvanı:@advanceData?.FirstOrDefault()?.TitleName</p>
+        <p>Birimi: @advanceData?.FirstOrDefault()?.BusinessUnitName</p>
+        <p>Talep Oluşturma Tarihi: @advanceData?.FirstOrDefault()?.RequestDate</p>
+        <p>Alınmak İstenen Tarih: @advanceData?.FirstOrDefault()?.DesiredDate</p>
+        <p>Projeler:  @advanceData?.FirstOrDefault()?.ProjectName</p>
     </div>
 
     <div class="card">
-        <p>Talep Edilen Tutar: [Talep Edilen Tutar]</p>
-        <p>Son Onaylanan Tutar: [Son Onaylanan Tutar]</p>
-        <p>Son Durumu: [Son Durumu]</p>
-        <p>Açıklama: [Açıklama]</p>
+        <p>Talep Edilen Tutar: @advanceData?.FirstOrDefault()?.AdvanceAmount</p>
+        <p>Son Onaylanan Tutar: @advanceData?.FirstOrDefault()?.ApprovedAmount</p>
+        <p>Son Durumu: @advanceData?.FirstOrDefault()?.StatusName</p>
+        <p>Açıklama: @advanceData?.FirstOrDefault()?.AdvanceDescription</p>
     </div>
 
     <div class="table-container">
@@ -132,29 +135,44 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1000</td>
-                    <td>Onay Bekliyor</td>
-                    <td>2023-01-01</td>
-                    <td>[İşlemi Yapan]</td>
-                    <td>[Sonraki Aşama Kullanıcısı]</td>
-                    <td>[Sonraki Durum]</td>
-                    <td>[Onaylanan Tutar]</td>
-                    <td>[Ödeme Yapılacak Tarih]</td>
-                </tr>
+                @foreach (var item in ViewBag.sonuc)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.StatusName</td>
+                        <td>@item.Date</td>
+                        <td>@item.TransactorID</td>
+                        <td>@item.StatusID</td>
+                        <td>@item.StatusID</td>
+                        <td>@item.ApprovedAmount</td>
+                        <td>@item.DeterminedPaymentDate</td>
+                    </tr>
+                }
+                
             </tbody>
         </table>
     </div>
 
-    <div class="approval-card">
-        <label for="approvedAmount">Uygun Görülen Tutar:</label>
-        <input type="text" id="approvedAmount" name="approvedAmount" class="approval-input">
+    <form asp-asp-controller="Advance" asp-action="AdvancePendingApprovalDetail" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-container">
+            <div class="approval-card">
+                <label for="ApprovedAmount">Uygun Görülen Tutar:</label>
+                <input asp-for="ApprovedAmount" type="text" id="approvedAmount" name="ApprovedAmount" class="approval-input" placeholder="Tutar Giriniz">
+               
+                <input asp-for="StatusID" type="hidden" id="StatusID" name="StatusID" value="@advanceData?.LastOrDefault()?.StatusID" />
 
-        <div class="approval-container">
-            <button class="approval-button btn-danger">Red</button>
-            <br>
-            <button class="approval-button btn-success">Onayla</button>
+
+
+                <div class="approval-container">
+                    <button type="submit" class="btn-danger" name="isApproved" value="false">Reddet</button>
+                    <br>
+                    <button type="submit" class="btn-success" name="isApproved" value="true">Onayla</button>
+                </div>
+            </div>
         </div>
-    </div>
+       
+    </form>
+    
 
 </div>

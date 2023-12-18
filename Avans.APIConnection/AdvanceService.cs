@@ -1,4 +1,4 @@
-﻿using Avans.DTOs;
+﻿
 using Avans.UI.DTOs;
 using Newtonsoft.Json;
 using System;
@@ -55,6 +55,24 @@ namespace Avans.APIConnection
             return null;
         }
 
+        public async Task<List<AdvancesPendingApprovalSelectDTO>> GetAdvanceForPendingApprovalDetailByID(int advanceID)
+        {
+            try
+            {
+                var response = await _client.GetAsync($"getadvanceforpendingapprovaldetailbyid/{advanceID}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<List<AdvancesPendingApprovalSelectDTO>>(await response.Content.ReadAsStringAsync());
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            return null;
+        }
+
 
         public async Task<List<AdvancesPendingApprovalSelectDTO>> GetAdvancePending()
         {
@@ -83,6 +101,19 @@ namespace Avans.APIConnection
             if (donendeger.IsSuccessStatusCode)
             {
                 return donendeger.Content.ReadAsStringAsync().Result == null ? "veri eklenirken bir hata oluştu" : "Avans eklendi...";
+            }
+            return null;
+        }
+
+        public async Task<string> ApproveAdvance(AdvanceUpdateDTO dto)
+        {
+            var str = new StringContent(JsonConvert.SerializeObject(dto));
+            str.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            var donendeger = await _client.PostAsync("updateadvance", str);
+            if (donendeger.IsSuccessStatusCode)
+            {
+                return donendeger.Content.ReadAsStringAsync().Result == null ? "veri güncellenirken bir hata oluştu" : "Avans eklendi...";
             }
             return null;
         }

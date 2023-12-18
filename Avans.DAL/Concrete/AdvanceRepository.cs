@@ -35,7 +35,7 @@ namespace Avans.DAL.Concrete
 
         public List<AdvanceDTO> GetAdvanceAll()
         {
-            var sqlQuery = "select adh.AdvanceID,adv.AdvanceAmount,adv.RequestDate,adv.DesiredDate,prj.ProjectName,sts.StatusName,emp.[Name],ttl.TitleName,adh.Date,rcp.ReceiptNo,adh.ApprovedAmount,pym.DeterminedPaymentDate,rcp.ReceiptDate,rcp.isRefundReceipt from AdvanceHistory adh \r\ninner join Advance adv ON adv.ID = adh.AdvanceID \r\ninner join Project prj ON prj.ID=adv.ProjectID \r\nleft join [Status] sts ON sts.ID = adv.StatusID \r\nleft join Employee emp ON emp.ID = adh.TransactorID \r\nleft join Title ttl ON ttl.ID = emp.TitleID \r\nleft join Payment pym ON pym.AdvanceID = adv.ID \r\nleft join Receipt rcp ON rcp.AdvanceID =adv.ID";
+            var sqlQuery = "select adh.AdvanceID,adv.AdvanceAmount,adv.RequestDate,adv.DesiredDate,prj.ProjectName,sts.StatusName,emp.[Name],ttl.TitleName,adh.Date,rcp.ReceiptNo,adh.ApprovedAmount,pym.DeterminedPaymentDate,rcp.ReceiptDate,rcp.isRefundReceipt from AdvanceHistory adh \r\ninner join Advance adv ON adv.ID = adh.AdvanceID\r\ninner join Project prj ON prj.ID=adv.ProjectID \r\nleft join [Status] sts ON sts.ID = adh.StatusID\r\nleft join Employee emp ON emp.ID = adh.TransactorID \r\nleft join Title ttl ON ttl.ID = emp.TitleID \r\nleft join Payment pym ON pym.AdvanceID = adv.ID \r\nleft join Receipt rcp ON rcp.AdvanceID =adv.ID";
 
             List<AdvanceDTO> advances = _dbConnection.Query<AdvanceDTO>(sqlQuery).ToList();
 
@@ -63,16 +63,36 @@ WHERE adh.ID = @AdvanceID";
 
             return advances;
         }
+        public List<AdvancesPendingApprovalSelectDTO> GetAdvanceForPendingApprovalDetailByID(int advanceID)
+        {
+            var sqlQuery = @"
+        select emp.Name,ttl.TitleName,pym.DeterminedPaymentDate,bsu.BusinessUnitName,adh.StatusID,adh.TransactorID,sts.StatusName,adv.ID,adv.RequestDate,adv.AdvanceAmount,adh.Date,adv.DesiredDate,prj.ProjectName,adh.ApprovedAmount,adv.AdvanceDescription from Advance adv 
+inner join Employee emp ON emp.ID = adv.EmployeeID
+inner join Title ttl ON ttl.ID = emp.TitleID
+inner join BusinessUnit bsu ON bsu.ID = emp.BusinessUnitID
+inner join [Status] sts ON sts.ID = adv.StatusID
+left join Project prj ON prj.ID = adv.ProjectID
+inner join AdvanceHistory adh ON adh.AdvanceID = adv.ID
+left join Payment pym ON pym.AdvanceID = adv.ID
+Where adv.ID = @AdvanceID";
+
+            var parameters = new { AdvanceID = advanceID };
+
+            List<AdvancesPendingApprovalSelectDTO> advances = _dbConnection.Query<AdvancesPendingApprovalSelectDTO>(sqlQuery, parameters).ToList();
+
+            return advances;
+        }
 
 
         public List<AdvancesPendingApprovalSelectDTO> GetAdvanceForPendingApproval()
         {
-            var sqlQuery = "select emp.Name,ttl.TitleName,bsu.BusinessUnitName,sts.StatusName,adv.RequestDate,adv.AdvanceAmount,adv.DesiredDate,prj.ProjectName from Advance adv \r\ninner join Employee emp ON emp.ID = adv.EmployeeID\r\ninner join Title ttl ON ttl.ID = emp.TitleID\r\ninner join BusinessUnit bsu ON bsu.ID = emp.BusinessUnitID\r\ninner join [Status] sts ON sts.ID = adv.StatusID\r\ninner join Project prj ON prj.ID = adv.ProjectID";
+            var sqlQuery = "select emp.Name,ttl.TitleName,pym.DeterminedPaymentDate,adh.StatusID,adv.ID,adh.Date,adh.TransactorID,bsu.BusinessUnitName,sts.StatusName,adv.RequestDate,adv.AdvanceAmount,adv.DesiredDate,prj.ProjectName from Advance adv \r\ninner join Employee emp ON emp.ID = adv.EmployeeID\r\ninner join Title ttl ON ttl.ID = emp.TitleID\r\ninner join BusinessUnit bsu ON bsu.ID = emp.BusinessUnitID\r\ninner join AdvanceHistory adh ON adh.AdvanceID = adv.ID\r\ninner join [Status] sts ON sts.ID = adh.StatusID\r\ninner join Project prj ON prj.ID = adv.ProjectID\r\nleft join Payment pym ON pym.AdvanceID = adv.ID";
 
             List<AdvancesPendingApprovalSelectDTO> advances = _dbConnection.Query<AdvancesPendingApprovalSelectDTO>(sqlQuery).ToList();
 
             return advances;
         }
+
 
         public bool AddAdvanceWithHistory(AdvanceInsertDTO advanceInsertDTO)
         {
@@ -169,7 +189,7 @@ WHERE adh.ID = @AdvanceID";
                                     command.Parameters.AddWithValue("@AdvanceID", advanceUpdateDTO.ID);
                                     command.Parameters.AddWithValue("@StatusID", advanceUpdateDTO.StatusID);
                                     command.Parameters.AddWithValue("@TransactorID", 9); // Burada bir transactor ID belirtmelisiniz
-                                    command.Parameters.AddWithValue("@ApprovedAmount", advanceUpdateDTO.AdvanceAmount);
+                                    command.Parameters.AddWithValue("@ApprovedAmount", advanceUpdateDTO.ApprovedAmount);
                                     command.Parameters.AddWithValue("@Date", DateTime.Now);
 
                                     // AdvanceHistory tablosuna ekleme işlemini gerçekleştir

@@ -17,7 +17,11 @@ namespace Avans.BLL.Concrete.Approval
                 advanceupdate.StatusID = 208;
 
             }
-            advanceupdate.StatusID = 103;
+            else
+            {
+                advanceupdate.StatusID = 103;
+
+            }
             return advanceupdate;
 
         }

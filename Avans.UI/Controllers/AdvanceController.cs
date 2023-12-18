@@ -41,6 +41,25 @@ namespace Avans.UI.Controllers
             return View();
         }
         [HttpGet]
+        public async Task<IActionResult> AdvancePendingApprovalDetail(int id)
+        {
+            var donendeger = await _api.GetAdvanceForPendingApprovalDetailByID(id);
+
+            ViewBag.sonuc = donendeger;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdvancePendingApprovalDetail(AdvanceUpdateDTO dto)
+        {
+
+            var donendeger = await _api.ApproveAdvance(dto);
+            TempData["sonuc"] = donendeger;
+            return RedirectToAction("AdvanceHistory");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> AdvancePendingApproval()
         {
             var donendeger = await _api.GetAdvancePending();

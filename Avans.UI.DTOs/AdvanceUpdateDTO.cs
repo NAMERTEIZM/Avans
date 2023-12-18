@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Avans.DTOs
+namespace Avans.UI.DTOs
 {
     public class AdvanceUpdateDTO
     {

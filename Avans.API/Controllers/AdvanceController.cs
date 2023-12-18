@@ -42,6 +42,14 @@ namespace Avans.API.Controllers
             return data;
 
         }
+
+        [HttpGet("~/api/getadvanceforpendingapprovaldetailbyid/{advanceID}")]
+        public List<AdvancesPendingApprovalSelectDTO> GetAdvanceForPendingApprovalDetailByID(int advanceID)
+        {
+            var data = _repository.GetAdvanceForPendingApprovalDetailByID(advanceID);
+            return data;
+
+        }
         [HttpGet("~/api/getadvancepending")]
         public List<AdvancesPendingApprovalSelectDTO> GetAdvancePending()
         {
