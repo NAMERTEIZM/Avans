@@ -1,0 +1,106 @@
+﻿@using Avans.UI.DTOs;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model AdvanceSelectDTO
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #277582;
+        padding: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        background-color: white;
+    }
+
+    th {
+        background-color: #6abadeba;
+        color: white;
+    }
+
+    .btn-exit {
+        border: none;
+        border-radius: 7px;
+        padding: 10px;
+        background-color: #dc3545;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .scrollable-table {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    #detail {
+        background-color: #6abadeba;
+        border: dotted 1px black;
+        border-radius: 3px;
+    }
+</style>
+
+<h2>Geçmiş Avans Taleplerim</h2>
+
+<div class="scrollable-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Talep Tutarı</th>
+                <th>Talep Oluşturma Tarihi</th>
+                <th>İstenilen Tarih</th>
+                <th>Proje</th>
+                <th>Talep Durumu</th>
+                <th>Onaylayan/Reddeden</th>
+                <th>Onaylayan/Reddeden Unvan</th>
+                <th>Onay/Red Tarihi</th>
+                <th>Onaylanan Tutar</th>
+                <th>Belirlenen Ödeme Tarihi</th>
+                <th>Ödeme Yapılan Tarih</th>
+                <th>Geri Ödeme Durumu</th>
+                <th>Detay</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.sonuc)
+            {
+                <tr>
+
+                    <td>@item.AdvanceAmount</td>
+                    <td>@item.RequestDate</td>
+                    <td>@item.DesiredDate</td>
+                    <td>@item.ProjectName</td>
+                    <td>@item.StatusName</td>
+                    <td>@item.Name</td>
+                    <td>@item.TitleName</td>
+                    <td>@item.Date</td>
+                    <td>@item.ApprovedAmount</td>
+                    <td>@item.DeterminedPaymentDate</td>
+                    <td>@item.ReceiptDate</td>
+             
+                    <td>@item.isRefundReceipt</td>
+                    <td><a type="submit" asp-controller="Advance" asp-action="AdvanceDetail" asp-route-id="@item.AdvanceID" class="detail-button">Detay</a></td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<button class="btn-exit">Çıkış</button>
+
+

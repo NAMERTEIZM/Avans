@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Avans.Core\Avans.Core.csproj" />
+    <ProjectReference Include="..\Avans.DTOs\Avans.DTOs.csproj" />
     <ProjectReference Include="..\Avans.Models\Avans.Models.csproj" />
   </ItemGroup>
 

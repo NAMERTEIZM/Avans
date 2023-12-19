@@ -1,0 +1,153 @@
+﻿@using Avans.UI.DTOs;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var advanceData = ViewBag.sonuc as List<AdvanceSelectDTO>;
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+    }
+
+    #main-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .card {
+        max-width: 48%;
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        background-color: white;
+    }
+
+    th {
+        background-color: #6abadeba;
+        color: white;
+    }
+
+    .exit-button {
+        border: none;
+        border-radius: 7px;
+        padding: 10px;
+        background-color: #dc3545;
+        color: #fff;
+        margin-top: 5px;
+    }
+
+    #TopText {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<div id="TopText">
+    <h2>Avans Talebi Tarihçesi</h2>
+</div>
+
+<div id="main-container">
+    <div class="card">
+        <p>Talep No: @advanceData?.FirstOrDefault()?.AdvanceID</p>
+        <p>Talep Oluşturulma Tarihi: @advanceData?.FirstOrDefault()?.RequestDate</p>
+        <p>Alınmak İstenen Tarih: @advanceData?.FirstOrDefault()?.DesiredDate</p>
+        <p>Projeler: @advanceData?.FirstOrDefault()?.ProjectName</p>
+        <p>Açıklama: @advanceData?.FirstOrDefault()?.AdvanceAmount</p>
+    </div>
+
+    <div class="card">
+        <p>Talep Edilen Tutar: @advanceData?.FirstOrDefault()?.AdvanceAmount</p>
+        <p>Onaylanan Tutar: @advanceData?.FirstOrDefault()?.ApprovedAmount</p>
+        <p>Son Durumu: @advanceData?.FirstOrDefault()?.StatusName</p>
+        <p>Makbuz No: @advanceData?.FirstOrDefault()?.ReceiptNo</p>
+        <p>Avans Geri Ödeme Durumu: @advanceData?.FirstOrDefault()?.isRefundReceipt</p>
+    </div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>İşlem No</th>
+            <th>Durum</th>
+            <th>İşlem Zamanı</th>
+            <th>İşlemi Yapan</th>
+            <th>Sonraki Aşama Kullanıcısı</th>
+            <th>Sonraki Durum</th>
+            <th>Onaylanan Tutar</th>
+            <th>Ödeme Yapılacak Tarih</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in advanceData)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.StatusName</td>
+                <td>@item.Date</td>
+                <td>@item.Name</td>
+
+                <td>@item.TitleName</td>
+
+                <td>
+                    @if (@item.StatusID == 201)
+                    {
+                        <a>Birim Müdürü Onaylayacak</a>
+                    }
+                    else if (@item.StatusID == 202)
+                    {
+                        <a>Direktör Onaylayacak</a>
+
+                    }
+                    else if (@item.StatusID == 203)
+                    {
+                        <a>Genel Müdür Yardımcısı Onaylayacak</a>
+
+                    }
+                    else if (@item.StatusID == 204)
+                    {
+                        <a>Genel Müdür Onaylayacak</a>
+
+                    }
+                    else if (@item.StatusID == 205)
+                    {
+                        <a>Finans Müdürü Tarih Belirleyecek</a>
+
+                    }
+                    else if (@item.StatusID == 206)
+                    {
+                        <a>Muhasebecinin Makbuz Kesmesi Bekleniyor </a>
+
+                    }
+                    else if (@item.StatusID == 208)
+                    {
+                        <a>Avans Ödenecek</a>
+
+                    }
+                </td>
+
+                <td>@item.ApprovedAmount</td>
+                <td>@item.DeterminedPaymentDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button class="exit-button">Çıkış</button>

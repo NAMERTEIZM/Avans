@@ -1,6 +1,10 @@
-﻿@{
+﻿@using Avans.UI.DTOs;
+@using System.Security.Claims;
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int employeeid = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 }
+@model AdvanceInsertDTO
 <style>
     
     body {
@@ -68,28 +72,35 @@
 
 </style>
 
+<form asp-controller="Advance" asp-action="AddAdvance" method="post">
+    @Html.AntiForgeryToken()
 
-<div class="form-container">
-    <label for="avansMiktari">Avans Miktarı:</label>
-    <input type="text" id="avansMiktari" name="avansMiktari" placeholder="Avans miktarını giriniz">
+    <div class="form-container">
+        <label for="avansMiktari">Avans Miktarı:</label>
+        <input asp-for="AdvanceAmount" type="text" id="avansMiktari" name="AdvanceAmount" placeholder="Avans miktarını giriniz">
 
-    <label for="istenilenTarih">İstenilen Tarih:</label>
-    <input type="date" id="istenilenTarih" name="istenilenTarih">
+        <label  for="istenilenTarih">İstenilen Tarih:</label>
+        <input asp-for="DesiredDate" type="date"  id="istenilenTarih" name="DesiredDate">
 
-    <label for="projeler">Projeler:</label>
-    <select id="projeler" name="projeler">
-        <option value="proje1">Proje 1</option>
-        <option value="proje2">Proje 2</option>
-        <option value="proje3">Proje 3</option>
-    </select>
+        <label for="projeler">Projeler:</label>
+        <select asp-for="ProjectID" id="projeler" name="ProjectID">
+            @foreach (var item in ViewBag.project)
+            {
+                <option value="@item.ID">@item.ProjectName</option>
+                
+            }
 
-    <label for="aciklama">Açıklama:</label>
-    <textarea id="aciklama" name="aciklama" rows="4" placeholder="Açıklama giriniz"></textarea>
+        </select>
 
-    <br>
+        <label for="aciklama">Açıklama:</label>
+        <textarea asp-for="AdvanceDescription" id="aciklama" name="AdvanceDescription" rows="4" placeholder="Açıklama giriniz"></textarea>
 
-    <div class="buttons-container">
-        <button class="btn btn-danger">Vazgeç</button>
-        <button class="btn btn-success">Kaydet</button>
+        <br>
+        <input asp-for="@Model.EmployeeID" type="hidden" value="@employeeid" />
+        <div class="buttons-container">
+            <button class="btn btn-danger">Vazgeç</button>
+            <button type="submit" class="btn btn-success">Kaydet</button>
+        </div>
     </div>
-</div>
+</form>
+

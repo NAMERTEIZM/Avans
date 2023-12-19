@@ -22,14 +22,8 @@ namespace Avans.UI.Controllers
         {
             return View();
         }
-        public IActionResult AddAdvance()
-        {
-            return View();
-        }
-        public IActionResult AdvanceHistory()
-        {
-            return View();
-        }
+        
+        
         public IActionResult AdvanceDetail()
         {
             return View();
@@ -38,10 +32,7 @@ namespace Avans.UI.Controllers
         {
             return View();
         }
-        public IActionResult AdvancePendingApprovalDetail()
-        {
-            return View();
-        }
+       
 
         public IActionResult Privacy()
         {

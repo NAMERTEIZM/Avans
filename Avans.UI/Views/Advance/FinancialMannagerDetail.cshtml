@@ -1,0 +1,188 @@
+﻿@using Avans.UI.DTOs;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var advanceData = ViewBag.sonuc as List<AdvancesPendingApprovalSelectDTO>;
+}
+@model AdvanceUpdateDTO
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+    }
+
+    #main-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    .detail-header {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .card {
+        width: 48%;
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-container {
+        width: 100%;
+        margin-top: 20px;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        background-color: white;
+    }
+
+    .approval-card {
+        width: 100%;
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .approval-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .approval-input {
+        width: 70%;
+        padding: 10px;
+        margin-right: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .approval-button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        width: 48%;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: #fff;
+    }
+</style>
+
+<h2 class="detail-header">Onay Bekleyen Avans Talebi Detayı</h2>
+
+<div id="main-container">
+
+    <div class="card">
+        <p>Çalışan Adı: @advanceData?.FirstOrDefault()?.Name</p>
+        <p>Unvanı:@advanceData?.FirstOrDefault()?.TitleName</p>
+        <p>Birimi: @advanceData?.FirstOrDefault()?.BusinessUnitName</p>
+        <p>Talep Oluşturma Tarihi: @advanceData?.FirstOrDefault()?.RequestDate</p>
+        <p>Alınmak İstenen Tarih: @advanceData?.FirstOrDefault()?.DesiredDate</p>
+        <p>Projeler:  @advanceData?.FirstOrDefault()?.ProjectName</p>
+    </div>
+
+    <div class="card">
+        <p>Talep Edilen Tutar: @advanceData?.FirstOrDefault()?.AdvanceAmount</p>
+        <p>Son Onaylanan Tutar: @advanceData?.FirstOrDefault()?.ApprovedAmount</p>
+        <p>Son Durumu: @advanceData?.FirstOrDefault()?.StatusName</p>
+        <p>Açıklama: @advanceData?.FirstOrDefault()?.AdvanceDescription</p>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>İşlem No</th>
+                    <th>Durum</th>
+                    <th>İşlem Zamanı</th>
+                    <th>İşlemi Yapan</th>
+                    <th>Sonraki Aşama Kullanıcısı</th>
+                    <th>Sonraki Durum</th>
+                    <th>Onaylanan Tutar</th>
+                    <th>Ödeme Yapılacak Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.sonuc)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.StatusName</td>
+                        <td>@item.Date</td>
+                        <td>@item.TransactorID</td>
+                        <td>@item.StatusID</td>
+                        <td>@item.StatusID</td>
+                        <td>@item.ApprovedAmount</td>
+                        <td>@item.DeterminedPaymentDate</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <form asp-controller="Advance" asp-action="FinancalManagerSetPaymentDate" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-container">
+            <div class="approval-card">
+                <label for="ApprovedAmount">Uygun Görülen Ödeme Tarihi:</label>
+                <input asp-for="DeterminedPaymentDate" type="date" id="DeterminedPaymentDate" name="DeterminedPaymentDate" class="approval-input" placeholder="gün/ay/yıl">
+
+                <input asp-for="StatusID" type="hidden" id="StatusID" name="StatusID" value="@advanceData?.LastOrDefault()?.StatusID" />
+                <input asp-for="ApprovedAmount" type="hidden" id="StatusID" name="ApprovedAmount" value="@advanceData?.LastOrDefault()?.ApprovedAmount" />
+                <input asp-for="ID" type="hidden" id="ID" name="ID" value="@advanceData?.LastOrDefault()?.ID" />
+
+
+
+
+
+                <div class="approval-container">
+                    <button type="submit" class="btn-danger" name="isApproved" value="false">Formu Temizle</button>
+                    <script>
+                        function resetDateInput() {
+                            document.getElementById("DeterminedPaymentDate").value = ""; 
+                        }
+                    </script>
+                    <br>
+                    <button type="submit" class="btn-success" name="isApproved" value="true">Onayla</button>
+                    
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>

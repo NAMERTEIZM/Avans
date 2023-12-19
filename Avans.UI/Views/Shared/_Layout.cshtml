@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+@{
+    string name = User.Identity.Name;
+    string role = User.FindFirst(ClaimTypes.Role)?.Value;
+    string surname = User.FindFirst(ClaimTypes.Surname)?.Value;
+    int roleid = Convert.ToInt32(User.FindFirst(ClaimTypes.Anonymous)?.Value);
+
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +15,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         body {
             height: 100vh;
@@ -65,10 +75,11 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1" style=" justify-content:end">
                        <li>
-                            <h5 style="margin-right: 30px;">Birim Müdürü : Mert MUSABEŞEOĞLU</h5>
+                            <h5 style="margin-right: 30px;">@role : @name @surname</h5>
                        </li>
                         <li class="nav-item">
-                            <button id="exit">Çıkış</button>
+                            <a id="exit" asp-controller="Account" asp-action="Logout">Çıkış</a>
+                           
                         </li>
 
                     </ul>
@@ -81,30 +92,64 @@
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <span data-feather="home"></span>
-                                Avans İşlemleri
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="info"></span>
-                                Yeni Avans Talebi
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="settings"></span>
-                                Geçmiş Avans Taleplerim
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="mail"></span>
-                                İletişim
-                            </a>
-                        </li>
+                        @if (roleid == 7)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link active">
+                                    <span data-feather="home"></span>
+                                    Avans İşlemleri
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Advance" asp-action="AddAdvance">
+                                    <span data-feather="info"></span>
+                                    Yeni Avans Talebi
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Advance" asp-action="AdvanceHistory">
+                                    <span data-feather="settings"></span>
+                                    Geçmiş Avans Taleplerim
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link active">
+                                    <span data-feather="home"></span>
+                                    Avans İşlemleri
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Advance" asp-action="AddAdvance">
+                                    <span data-feather="info"></span>
+                                    Yeni Avans Talebi
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Advance" asp-action="AdvanceHistory">
+                                    <span data-feather="settings"></span>
+                                    Geçmiş Avans Taleplerim
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Advance" asp-action="AdvancePendingApproval">
+                                    <span data-feather="settings"></span>
+                                    Onay Bekleyen Talepler
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="mail"></span>
+                                    İletişim
+                                </a>
+                            </li>
+                        }
+
+                       
+
+
                     </ul>
                 </div>
             </nav>

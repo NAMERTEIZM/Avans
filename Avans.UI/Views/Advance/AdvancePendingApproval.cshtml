@@ -1,0 +1,108 @@
+﻿@using Avans.UI.DTOs;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model AdvancesPendingApprovalSelectDTO
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #277582;
+        padding: 20px;
+    }
+
+    .table-container {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        background-color: white;
+    }
+
+    th {
+        background-color: #6abadeba;
+        color: white;
+    }
+
+    .btn-exit {
+        border: none;
+        border-radius: 7px;
+        padding: 10px;
+        background-color: #dc3545;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    #detail {
+        background-color: #6abadeba;
+        border: dotted 1px black;
+        border-radius: 3px;
+    }
+</style>
+
+<h2>Onay Bekleyen Avans Talepleri</h2>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Çalışanın Adı</th>
+                <th>Unvanı</th>
+                <th>Birimi</th>
+                <th>Talep Durumu</th>
+                <th>Talep Oluşturulma Tarihi</th>
+                <th>Talep Tutarı</th>
+                <th>İstenilen Tarih</th>
+                <th>Proje</th>
+                <th>Detay</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.sonuc)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.TitleName</td>
+                    <td>@item.BusinessUnitName</td>
+                    <td>@item.StatusName</td>
+                    <td>@item.RequestDate</td>
+                    <td>@item.AdvanceAmount</td>
+                    <td>@item.DesiredDate</td>
+                    <td>@item.ProjectName</td>
+                    <td>
+                        @if (item.StatusID == 206)
+                        {
+                            <a type="submit" asp-controller="Advance" asp-action="FinancialMannagerDetail" asp-route-id="@item.ID" class="detail-button">Detay</a>
+                        }
+                        else if (item.StatusID == 208)
+                        {
+                            <a type="submit" asp-controller="Advance" asp-action="AccountantDetail" asp-route-id="@item.ID" class="detail-button">Detay</a>
+                        }
+                        else
+                        {
+                            <a type="submit" asp-controller="Advance" asp-action="AdvancePendingApprovalDetail" asp-route-id="@item.ID" class="detail-button">Detay</a>
+                        }
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<button class="btn-exit">Çıkış</button>
