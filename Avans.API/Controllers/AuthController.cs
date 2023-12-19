@@ -26,9 +26,9 @@ namespace Avans.API.Controllers
             _conf = conf;
         }
 
-        [HttpPost("~/api/login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO dto)
-        {
+        { 
             var loginResultDto = new ApiResult<LoginResultDto>();
 
             var isThereUser = await _authservice.Login(dto.Email, dto.Password);
@@ -47,8 +47,10 @@ namespace Avans.API.Controllers
                 Expires = DateTime.Now.AddMinutes(20),
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-             new Claim(ClaimTypes.Name,userInfo.Email),
+                    new Claim(ClaimTypes.Name,userInfo.Name),
+                    new Claim(ClaimTypes.Email,userInfo.Email),
              new Claim(ClaimTypes.Role,userInfo.TitleName),
+
 
                 }),
                 Issuer = issuer,
@@ -66,14 +68,16 @@ namespace Avans.API.Controllers
                 Employee = new EmployeeDTO
                 {
                     Email = userInfo.Email,
-                    TitleId = userInfo.TitleId,
+                    TitleID = userInfo.TitleID,
                     Name = userInfo.Name,
                     Password = userInfo.Password,
                     SurName = userInfo.SurName,
                     TitleName = userInfo.TitleName,
+                    ID = userInfo.ID,
+                    
                 }
             };
-            return Ok(loginResultDto);
+            return Ok(loginResultDto.Data);
         }
 
         [HttpPost("~/api/register")]

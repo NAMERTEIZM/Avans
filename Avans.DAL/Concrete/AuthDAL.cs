@@ -33,7 +33,7 @@ namespace Avans.DAL.Concrete
             parameters.Add("@Name", emplpoyee.Name, DbType.String);
             parameters.Add("@Surname", emplpoyee.Surname, DbType.String);
             parameters.Add("@Email", emplpoyee.Email, DbType.String);
-            parameters.Add("@TitleID", emplpoyee.TitleId, DbType.Int32);
+            parameters.Add("@TitleID", emplpoyee.TitleID, DbType.Int32);
             parameters.Add("@PasswordHash", emplpoyee.PasswordHash, DbType.Binary);
             parameters.Add("@PasswordSalt", emplpoyee.PasswordSalt, DbType.Binary);
 
@@ -55,7 +55,8 @@ namespace Avans.DAL.Concrete
 
         public async Task<EmployeeDTO> GetUserInfo(string mail)
         {
-            string query = @"SELECT Name,Surname,Email,TitleName FROM Employee inner join Title on Title.ID=Employee.TitleID WHERE Email=@Email";
+            string query = @"SELECT emp.ID,Name,TitleID,Surname,Email,TitleName FROM Employee emp
+inner join Titles on Titles.ID=emp.TitleID WHERE Email= @Email";
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@Email", mail, DbType.String);
             using var conn = _helper.CreateConnection();
@@ -66,7 +67,9 @@ namespace Avans.DAL.Concrete
                     Name = employee.Name,
                     Email = employee.Email,
                     SurName = employee.Surname,
-                    TitleName = title.TitleName
+                    TitleName = title.TitleName,
+                    ID = employee.ID,
+                    TitleID = employee.TitleID.Value
                 };
 
                 return employeeDTO;

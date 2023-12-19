@@ -51,9 +51,13 @@ namespace Avans.API
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IGenericRepository<Advance>), typeof(GenericRepository<Advance>));
             services.AddScoped(typeof(IGenericRepository<Project>), typeof(GenericRepository<Project>));
+            services.AddScoped(typeof(IGenericRepository<Title>), typeof(GenericRepository<Title>));
             services.AddScoped<MyMapper<Project, ProjectSelectDTO>>();
             services.AddScoped<MyMapper<EmployeeDTO, Employee>>();
+            services.AddScoped<MyMapper<Title,TitleDTO>>();
 
+            services.AddScoped<TitleRepository>();
+            services.AddScoped<TitleService>();
             services.AddScoped<AdvanceService>();
             services.AddScoped<ConnectionHelper>();
             services.AddScoped<AdvanceRepository>();

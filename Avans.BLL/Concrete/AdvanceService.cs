@@ -48,12 +48,12 @@ namespace Avans.BLL.Concrete
 
             return advances;
         }
-        public List<AdvancesPendingApprovalSelectDTO> GetPending()
+        public List<AdvancesPendingApprovalSelectDTO> GetPending(int TitleID)
         {
             List<AdvancesPendingApprovalSelectDTO> advances = new List<AdvancesPendingApprovalSelectDTO>();
             try
             {
-                advances = advanceRepository.GetAdvanceForPendingApproval().ToList();
+                advances = advanceRepository.GetAdvanceForPendingApproval(TitleID).ToList();
             }
             catch (Exception ex)
             {

@@ -50,10 +50,11 @@ namespace Avans.API.Controllers
             return data;
 
         }
-        [HttpGet("~/api/getadvancepending")]
-        public List<AdvancesPendingApprovalSelectDTO> GetAdvancePending()
+        [HttpGet("~/api/getadvancepending/{StatusID}")]
+        public List<AdvancesPendingApprovalSelectDTO> GetAdvancePending(int StatusID)
         {
-            return _service.GetPending();
+            var data = _service.GetPending(StatusID);
+            return data;
 
         }
         [HttpPost("~/api/addadvance")]

@@ -25,7 +25,7 @@ namespace Avans.Models.Entities
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public int? BusinessUnitId { get; set; }
-        public int? TitleId { get; set; }
+        public int? TitleID { get; set; }
         public int? UpperEmployeeId { get; set; }
 
         //public virtual BusinessUnit BusinessUnit { get; set; }

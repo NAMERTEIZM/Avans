@@ -74,12 +74,12 @@ namespace Avans.APIConnection
         }
 
 
-        public async Task<List<AdvancesPendingApprovalSelectDTO>> GetAdvancePending()
+        public async Task<List<AdvancesPendingApprovalSelectDTO>> GetAdvancePending(int StatusID)
         {
 
             try
             {
-                var value = await _client.GetAsync("getadvancepending");
+                var value = await _client.GetAsync($"getadvancepending/{StatusID}");
                 if (value.IsSuccessStatusCode)
                 {
                     return JsonConvert.DeserializeObject<List<AdvancesPendingApprovalSelectDTO>>(await value.Content.ReadAsStringAsync());

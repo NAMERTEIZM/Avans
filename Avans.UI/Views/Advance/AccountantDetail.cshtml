@@ -2,8 +2,11 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var advanceData = ViewBag.sonuc as List<AdvancesPendingApprovalSelectDTO>;
+    int count = 1;
+    
 }
 @model AdvanceUpdateDTO
+
 
 <style>
     body {
@@ -138,7 +141,7 @@
                 @foreach (var item in ViewBag.sonuc)
                 {
                     <tr>
-                        <td>@item.ID</td>
+                        <td>@count++</td>
                         <td>@item.StatusName</td>
                         <td>@item.Date</td>
                         <td>@item.TransactorID</td>

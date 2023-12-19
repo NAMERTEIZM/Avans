@@ -1,12 +1,16 @@
 ﻿using Avans.APIConnection;
 using Avans.UI.DTOs;
 using Avans.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.JSInterop.Infrastructure;
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Avans.UI.Controllers
 {
+    [Authorize]
     public class AdvanceController : Controller
     {
         AdvanceService _api;
@@ -22,9 +26,10 @@ namespace Avans.UI.Controllers
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> AdvanceHistory(int EmployeeID)
+        public async Task<IActionResult> AdvanceHistory()
         {
-            var donendeger = await _api.GetAdvance(EmployeeID);
+            var employeeID = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var donendeger = await _api.GetAdvance(employeeID);
             ViewBag.sonuc = donendeger;
 
             //TempData["sonuc"] = donendeger;
@@ -103,7 +108,8 @@ namespace Avans.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> AdvancePendingApproval()
         {
-            var donendeger = await _api.GetAdvancePending();
+            var statusid = Convert.ToInt32(User.FindFirst(ClaimTypes.Anonymous)?.Value);
+            var donendeger = await _api.GetAdvancePending(statusid);
             ViewBag.sonuc = donendeger;
 
             //TempData["sonuc"] = donendeger;

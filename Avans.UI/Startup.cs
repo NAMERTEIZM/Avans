@@ -1,4 +1,5 @@
 using Avans.APIConnection;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +33,31 @@ namespace Avans.UI
             {
                 conf.BaseAddress = new Uri(Configuration["MyBaseUri"]);
             });
+            services.AddHttpClient<ApiRequestService>(conf =>
+            {
+                conf.BaseAddress = new Uri(Configuration["MyBaseUri"]);
+            });
+            services.AddHttpClient<TitleService>(conf =>
+            {
+                conf.BaseAddress = new Uri(Configuration["MyBaseUri"]);
+            });
+
+            services.AddAuthentication(a =>
+            {
+                a.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                a.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                a.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(a =>
+            {
+                a.LoginPath = "/Account/Login";
+                a.Cookie.Name = CookieAuthenticationDefaults.AuthenticationScheme;
+                a.Cookie.HttpOnly = true;
+            });
+
+            services.AddAuthorization();
+            services.AddMemoryCache();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,11 +71,15 @@ namespace Avans.UI
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -63,7 +93,7 @@ namespace Avans.UI
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }

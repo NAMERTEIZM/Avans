@@ -1,0 +1,107 @@
+﻿@using Avans.UI.DTOs;
+
+@{
+    Layout = null;
+}
+@model EmployeeDTO
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: 'Arial';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            width: 315px;
+            overflow: hidden;
+            padding: 20px;
+            background-color: #6abadeba;
+            border-radius: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #277582;
+            padding: 20px;
+        }
+
+        label {
+            color: #ffffff;
+            font-size: 17px;
+        }
+
+        #Uname,
+        #Pass,
+        #log {
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 3px;
+            padding-left: 8px;
+            margin-bottom: 15px;
+        }
+
+        #log {
+            border-radius: 17px;
+            color: #37a7dbba;
+            font-weight: bold;
+        }
+
+            #log:hover {
+                background-color: #37a7dbba;
+                color: white;
+            }
+
+        span {
+            color: white;
+            font-size: 17px;
+        }
+
+        #check {
+            margin-right: 5px;
+        }
+
+        a {
+            float: right;
+            color: white;
+        }
+    </style>
+
+    <div class="login-container">
+        <form asp-controller="Account" asp-action="Login">
+            <label>
+                <b>
+                    Kullanıcı Adı
+                </b>
+            <br>
+
+            </label>
+        <input asp-for="Email" type="email" name="Email" id="UnameEmail placeholder="Email giriniz">
+            <br><br>
+            <label>
+                <b>
+                    Şifre
+                </b>
+                <br>
+            </label>
+        <input asp-for="Password" type="Password" name="Password" id="Password" placeholder="Şifre giriniz">
+            
+            <br><br>
+            <input type="submit" name="log" id="log" value="Giriş Yap">
+
+            <br><br>
+        <a asp-action="Register">Kayıt OL !</a>
+
+            <br><br>
+            <input type="checkbox" id="check">
+            <span>Beni Hatırla</span>
+            <br><br>
+            <a href="#">Şifremi Unuttum</a>
+        </form>
+    </div>
+

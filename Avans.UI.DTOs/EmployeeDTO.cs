@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Avans.DTOs
+namespace Avans.UI.DTOs
 {
     public class EmployeeDTO
     {
@@ -15,6 +15,5 @@ namespace Avans.DTOs
         public string Password { get; set; }
         public string TitleName { get; set; }
         public int ID { get; set; }
-
     }
 }

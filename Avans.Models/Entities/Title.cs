@@ -16,7 +16,7 @@ namespace Avans.Models.Entities
         //    TitleAuthorizations = new HashSet<TitleAuthorization>();
         //}
 
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string TitleName { get; set; }
         public string TitleDescription { get; set; }
         public int EmployeeID { get; set; }

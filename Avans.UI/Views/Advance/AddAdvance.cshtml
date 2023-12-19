@@ -1,6 +1,8 @@
 ﻿@using Avans.UI.DTOs;
+@using System.Security.Claims;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int employeeid = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 }
 @model AdvanceInsertDTO
 <style>
@@ -78,7 +80,7 @@
         <input asp-for="AdvanceAmount" type="text" id="avansMiktari" name="AdvanceAmount" placeholder="Avans miktarını giriniz">
 
         <label  for="istenilenTarih">İstenilen Tarih:</label>
-        <input asp-for="DesiredDate" type="date" id="istenilenTarih" name="DesiredDate">
+        <input asp-for="DesiredDate" type="date"  id="istenilenTarih" name="DesiredDate">
 
         <label for="projeler">Projeler:</label>
         <select asp-for="ProjectID" id="projeler" name="ProjectID">
@@ -94,7 +96,7 @@
         <textarea asp-for="AdvanceDescription" id="aciklama" name="AdvanceDescription" rows="4" placeholder="Açıklama giriniz"></textarea>
 
         <br>
-
+        <input asp-for="@Model.EmployeeID" type="hidden" value="@employeeid" />
         <div class="buttons-container">
             <button class="btn btn-danger">Vazgeç</button>
             <button type="submit" class="btn btn-success">Kaydet</button>

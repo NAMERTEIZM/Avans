@@ -1,0 +1,120 @@
+﻿@using Avans.UI.DTOs;
+
+@{
+    Layout = null;
+}
+  @model EmployeeDTO
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+        font-family: 'Arial';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+        .login-container {
+            width: 315px;
+            overflow: hidden;
+            padding: 20px;
+            background-color: #6abadeba;
+            border-radius: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #277582;
+            padding: 20px;
+        }
+
+        label {
+            color: #ffffff;
+            font-size: 17px;
+        }
+
+        #Uname,
+        #Pass,
+        #log,
+        #cars {
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 3px;
+            padding-left: 8px;
+            margin-bottom: 15px;
+        }
+
+        #log {
+            border-radius: 17px;
+            color: #37a7dbba;
+            font-weight: bold;
+        }
+
+        span {
+            color: white;
+            font-size: 17px;
+        }
+
+        a {
+            float: right;
+            color: white;
+        }
+    </style>
+
+    <div class="login-container">
+        <form asp-controller="Account" asp-action="Register" method="post">
+
+        <label>
+            <b>
+                Kullanıcı Adı
+            </b>
+        </label>
+        <input asp-for="Name" type="text" name="Name" id="Name" placeholder="İsminizi giriniz">
+        <br><br>
+
+        <label>
+            <b>
+                Kullanıcı Soyadı
+            </b>
+        </label>
+        <input asp-for="SurName" type="text" name="SurName" id="SurName" placeholder="Soyisminizi giriniz">
+        <br><br>
+
+            <label>
+                <b>
+                    E-mail
+                </b>
+            </label>
+        <input asp-for="Email" type="email" name="Email" id="Email" placeholder="Email giriniz">
+            <br><br>
+
+            <label>
+                <b>
+                    Şifre
+                </b>
+                <br>
+            </label>
+        <input asp-for="Password" type="Password" name="Password" id="Pass" placeholder="Şifre giriniz">
+            <br><br>
+            <label>
+                <b>
+                    Ünvan
+                </b>
+            </label>
+            <br>
+        <select asp-for="TitleID" name="TitleID" id="titles">
+                @foreach (var item in ViewBag.title)
+                                        {
+                <option value="@item.ID">@item.TitleName</option>
+
+            }
+            </select>
+            <br><br>
+            <input type="submit" name="log" id="log" value="Kayıt Ol! ">
+            <br><br>
+            <a asp-action="Login">Bir hesabın mevcut mu?</a>
+        </form>
+    </div>
+
