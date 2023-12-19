@@ -13,6 +13,11 @@ namespace Avans.DTOs
         public int ApprovedAmount { get; set; }
         public int TransactorID { get; set; }
         public bool isApproved { get; set; }
+        public DateTime? DeterminedPaymentDate { get; set; }
+        public int ReceiptNo { get; set; }
+        public int EmployeeID { get; set; }
+
+
 
     }
 }

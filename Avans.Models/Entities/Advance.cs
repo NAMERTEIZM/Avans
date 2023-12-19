@@ -32,5 +32,7 @@ namespace Avans.Models.Entities
         public string ReceiptNo { get; set; }
 
         public bool isRefundReceipt { get; set; }
+        public int EmployeeID { get; set; }
+
     }
 }

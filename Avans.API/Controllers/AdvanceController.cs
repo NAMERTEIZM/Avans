@@ -28,11 +28,11 @@ namespace Avans.API.Controllers
             _approvalService = approvalService;
 
         }
-        [HttpGet("~/api/getadvance")]
-        public List<AdvanceDTO> GetAdvance()
+        [HttpGet("~/api/getadvance/{EmployeeID}")]
+        public List<AdvanceDTO> GetAdvance(int EmployeeID)
         {
-            return _repository.GetAdvanceAll();
-
+           var data=  _repository.GetAdvanceAll(EmployeeID);
+            return data;
         }
        
         [HttpGet("~/api/getadvancebyid/{advanceID}")]

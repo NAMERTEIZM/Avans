@@ -14,5 +14,7 @@ namespace Avans.DTOs
         public int TitleId { get; set; }
         public string Password { get; set; }
         public string TitleName { get; set; }
+        public int ID { get; set; }
+
     }
 }

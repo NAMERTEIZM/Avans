@@ -19,20 +19,20 @@ namespace Avans.APIConnection
         {
             _client = client;
         }
-        public async Task<List<AdvanceSelectDTO>> GetAdvance()
+        public async Task<List<AdvanceSelectDTO>> GetAdvance(int EmployeeID)
         {
 
             try
-             {
-                var value = await _client.GetAsync("getadvance");
-                if (value.IsSuccessStatusCode)
+            {
+                var response = await _client.GetAsync($"getadvance/{EmployeeID}");
+
+                if (response.IsSuccessStatusCode)
                 {
-                    return JsonConvert.DeserializeObject<List<AdvanceSelectDTO>>(await value.Content.ReadAsStringAsync());
+                    return JsonConvert.DeserializeObject<List<AdvanceSelectDTO>>(await response.Content.ReadAsStringAsync());
                 }
             }
             catch (Exception ex)
             {
-
                 return null;
             }
             return null;

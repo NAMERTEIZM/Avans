@@ -10,5 +10,7 @@ namespace Avans.DTOs
     {
         public int Id { get; set; }
         public string TitleName { get; set; }
+        public int EmployeeID { get; set; }
+
     }
 }

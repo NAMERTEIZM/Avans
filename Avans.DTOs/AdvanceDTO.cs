@@ -34,6 +34,7 @@ namespace Avans.DTOs
         public string ReceiptNo { get; set; }
 
         public bool isRefundReceipt { get; set; }
+        public int EmployeeID { get; set; }
 
     }
 }

@@ -84,7 +84,21 @@
                     <td>@item.AdvanceAmount</td>
                     <td>@item.DesiredDate</td>
                     <td>@item.ProjectName</td>
-                    <td><a type="submit" asp-controller="Advance" asp-action="AdvancePendingApprovalDetail" asp-route-id="@item.ID" class="detail-button">Detay</a></td>
+                    <td>
+                        @if (item.StatusID == 206)
+                        {
+                            <a type="submit" asp-controller="Advance" asp-action="FinancialMannagerDetail" asp-route-id="@item.ID" class="detail-button">Detay</a>
+                        }
+                        else if (item.StatusID == 208)
+                        {
+                            <a type="submit" asp-controller="Advance" asp-action="AccountantDetail" asp-route-id="@item.ID" class="detail-button">Detay</a>
+                        }
+                        else
+                        {
+                            <a type="submit" asp-controller="Advance" asp-action="AdvancePendingApprovalDetail" asp-route-id="@item.ID" class="detail-button">Detay</a>
+                        }
+                    </td>
+
                 </tr>
             }
         </tbody>

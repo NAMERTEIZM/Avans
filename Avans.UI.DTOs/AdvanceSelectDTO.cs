@@ -26,5 +26,6 @@ namespace Avans.UI.DTOs
         public DateTime ReceiptDate { get; set; }
         public string ReceiptNo { get; set; }
         public bool isRefundReceipt { get; set; }
+        public int EmployeeID { get; set; }
     }
 }

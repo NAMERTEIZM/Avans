@@ -22,9 +22,9 @@ namespace Avans.UI.Controllers
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> AdvanceHistory()
+        public async Task<IActionResult> AdvanceHistory(int EmployeeID)
         {
-            var donendeger = await _api.GetAdvance();
+            var donendeger = await _api.GetAdvance(EmployeeID);
             ViewBag.sonuc = donendeger;
 
             //TempData["sonuc"] = donendeger;
@@ -40,9 +40,31 @@ namespace Avans.UI.Controllers
 
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> AdvancePendingApprovalDetail(int id)
         {
+
+            var donendeger = await _api.GetAdvanceForPendingApprovalDetailByID(id);
+
+            ViewBag.sonuc = donendeger;
+            return View();
+        }
+        //
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdvancePendingApprovalDetail(AdvanceUpdateDTO dto)
+        {
+
+            var donendeger = await _api.ApproveAdvance(dto);
+            TempData["sonuc"] = donendeger;
+            return RedirectToAction("AdvanceHistory");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FinancialMannagerDetail(int id)
+        {
+
             var donendeger = await _api.GetAdvanceForPendingApprovalDetailByID(id);
 
             ViewBag.sonuc = donendeger;
@@ -51,7 +73,26 @@ namespace Avans.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AdvancePendingApprovalDetail(AdvanceUpdateDTO dto)
+        public async Task<IActionResult> FinancalManagerSetPaymentDate(AdvanceUpdateDTO dto)
+        {
+
+            var donendeger = await _api.ApproveAdvance(dto);
+            TempData["sonuc"] = donendeger;
+            return RedirectToAction("AdvanceHistory");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AccountantDetail(int id)
+        {
+
+            var donendeger = await _api.GetAdvanceForPendingApprovalDetailByID(id);
+
+            ViewBag.sonuc = donendeger;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AccountantDetail(AdvanceUpdateDTO dto)
         {
 
             var donendeger = await _api.ApproveAdvance(dto);

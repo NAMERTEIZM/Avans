@@ -23,5 +23,7 @@ namespace Avans.DTOs
         public int TransactorID { get; set; }
         public int StatusID { get; set; }
         public DateTime DeterminedPaymentDate { get; set; }
+        public int EmployeeID { get; set; }
+
     }
 }

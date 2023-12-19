@@ -26,5 +26,9 @@ namespace Avans.UI.DTOs
         [Column("StatusID")]
 
         public int StatusID { get; set; }
+        public int EmployeeID { get; set; }
+        public DateTime RequestDate { get; set; }
+
+
     }
 }

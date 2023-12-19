@@ -17,7 +17,7 @@ namespace Avans.Models.Entities
             //Receipts = new HashSet<Receipt>();
         }
 
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }

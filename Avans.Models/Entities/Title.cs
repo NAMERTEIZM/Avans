@@ -19,6 +19,8 @@ namespace Avans.Models.Entities
         public int Id { get; set; }
         public string TitleName { get; set; }
         public string TitleDescription { get; set; }
+        public int EmployeeID { get; set; }
+
 
         //public virtual ICollection<Employee> Employees { get; set; }
         //public virtual ICollection<Rule> Rules { get; set; }

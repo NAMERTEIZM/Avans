@@ -17,6 +17,8 @@ namespace Avans.UI.DTOs
         [Column("ProjectName")]
 
         public string ProjectName { get; set; }
+        public int EmployeeID { get; set; }
+
 
     }
 }

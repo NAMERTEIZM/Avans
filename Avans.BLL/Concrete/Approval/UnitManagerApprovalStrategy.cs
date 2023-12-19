@@ -12,7 +12,12 @@ namespace Avans.BLL.Concrete.Approval
     {
         public AdvanceUpdateDTO MakeApprove(AdvanceUpdateDTO advanceupdate)
         {
-            if (advanceupdate.isApproved != false) 
+            if (advanceupdate.ApprovedAmount >= 0 && advanceupdate.ApprovedAmount <= 1000 && advanceupdate.StatusID == 201 && advanceupdate.isApproved != false) 
+            {
+                advanceupdate.StatusID = 206;
+
+            }
+            else if (advanceupdate.isApproved != false) 
             {
             advanceupdate.StatusID = 202;
 

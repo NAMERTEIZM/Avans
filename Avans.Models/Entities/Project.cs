@@ -26,5 +26,7 @@ namespace Avans.Models.Entities
 
         [Column("StartingDate")] 
         public DateTime StartingDate { get; set; }
+        public int EmployeeID { get; set; }
+
     }
 }

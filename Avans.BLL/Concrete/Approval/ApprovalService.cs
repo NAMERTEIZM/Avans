@@ -18,7 +18,18 @@ namespace Avans.BLL.Concrete.Approval
         {
             decimal advanceAmount = advanceupdate.ApprovedAmount;
 
-            if (advanceAmount >= 0 && advanceAmount <= 1000 ||advanceupdate.StatusID == 201)
+
+
+            if (advanceupdate.StatusID == 208)
+            {
+                approvalOperation = new ApprovalOperation(new AccountantApprovalStrategy());
+                
+            }
+            else if (advanceupdate.StatusID == 206)
+            {
+                approvalOperation = new ApprovalOperation(new FinancialManagerApprovalStrategy());
+            }
+           else if (advanceAmount >= 0 && advanceAmount <= 1000 || advanceupdate.StatusID == 201)
             {
                 approvalOperation = new ApprovalOperation(new UnitManagerApprovalStrategy());
 
@@ -33,7 +44,7 @@ namespace Avans.BLL.Concrete.Approval
             else if (advanceAmount >= 5001 && advanceAmount <= 10000 || advanceupdate.StatusID == 203)
             {
                 approvalOperation = new ApprovalOperation(new GeneralManagerAssistantApprovalStrategy());
-               
+
                 //approvalOperation.MakeApprove(advanceupdate);
 
 
@@ -42,19 +53,7 @@ namespace Avans.BLL.Concrete.Approval
             {
                 approvalOperation = new ApprovalOperation(new GeneralManagerApprovalStrategy());
 
-
-
             }
-            else if (new[] { 202, 203, 204,205 }.Contains(advanceupdate.StatusID)) 
-            {
-                approvalOperation = new ApprovalOperation(new FinancialManagerApprovalStrategy());
-            }
-            else if (advanceupdate.StatusID == 208) 
-            {
-                approvalOperation = new ApprovalOperation(new AccountantApprovalStrategy());
-            }
-
-
 
 
             approvalOperation.MakeApprove(advanceupdate);
